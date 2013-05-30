@@ -7,15 +7,16 @@ void quickSort(int *ary, int left, int right)
     int hold = ary[left];
     int l = left;
     int r = right;
-    while(l < r && ary[r]>=hold) --r;
-    if(l<r)
-        ary[l++] = ary[r];
-    while(l < r && ary[l]<hold) ++l;
-    if(l<r)
-        ary[r--] = ary[l];
+    while(l<r){
+        while(l < r && ary[r]>=hold) --r;
+        if(l<r)
+            ary[l++] = ary[r];
+        while(l < r && ary[l]<hold) ++l;
+        if(l<r)
+            ary[r--] = ary[l];
 
-    ary[l] = hold;
-
+        ary[l] = hold;
+    }
     quickSort(ary, left, l-1);
     quickSort(ary, l+1, right);
 }
