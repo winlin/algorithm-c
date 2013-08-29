@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 #include <stdlib.h>
 using std::endl;
 using std::cin;
@@ -49,6 +50,22 @@ void deep_first_binary_tree_search_no_recursion(node *tree)
         cout<<current->data<<endl;
     }
 }
+void breadth_first_binary_tree_search_no_recursion(node *tree)
+{
+    std::queue<node *>visited, unvisited;
+    unvisited.push(&tree[0]);
+    node *current = NULL;
+    while(!unvisited.empty()) {
+        current = unvisited.front();
+        unvisited.pop();
+         if(current->left)
+            unvisited.push(current->left);
+        if(current->right)
+            unvisited.push(current->right);
+
+        cout<<current->data<<endl;
+    }
+}
 void deep_first_binary_tree_search_recursion(node *tree)
 {
     if(!tree)
@@ -61,13 +78,16 @@ void deep_first_binary_tree_search_recursion(node *tree)
 int main(void) 
 {
     node *tree = create_tree(10);
-    cout<<"no recursion:"<<endl;
+    cout<<"deep no recursion:"<<endl;
     deep_first_binary_tree_search_no_recursion(tree);
     
-    cout<<"recursion:"<<endl;
+    cout<<"deep recursion:"<<endl;
     deep_first_binary_tree_search_recursion(tree);
     //omit the free action
     
+    cout<<"breadth recursion:"<<endl;
+    breadth_first_binary_tree_search_no_recursion(tree);
+
     return 0;
 }
 
